@@ -128,3 +128,26 @@
     @apply font-sans;
   }
 }
+@layer utilities {
+  .bg-grid {
+    background-image: linear-gradient(
+        to right,
+        var(--foreground) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, var(--foreground) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.04;
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      to right,
+      var(--foreground),
+      color-mix(in oklch, var(--foreground) 60%, transparent)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}

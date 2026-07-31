@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { FOOTER_COLUMNS } from "@/constants/landing";
 
 export function Footer() {
@@ -11,15 +11,15 @@ export function Footer() {
             <Link href="/" className="text-sm font-semibold tracking-tight">
               SkillBridge<span className="text-foreground/50">AI</span>
             </Link>
-            
+            <Link
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
               className="mt-4 inline-flex text-foreground/60 hover:text-foreground"
             >
-              <Github className="h-5 w-5" />
-            </a>
+              <ExternalLink className="h-5 w-5" />
+            </Link>
           </div>
 
           {FOOTER_COLUMNS.map((column) => (
@@ -28,12 +28,12 @@ export function Footer() {
               <ul className="mt-4 space-y-3">
                 {column.links.map((link) => (
                   <li key={link.label}>
-                    
+                    <Link
                       href={link.href}
                       className="text-sm text-foreground/60 hover:text-foreground"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

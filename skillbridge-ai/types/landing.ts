@@ -26,3 +26,8 @@ export interface FooterColumn {
   title: string;
   links: FooterLink[];
 }
+export interface SidebarItem {
+  label: string;
+  href: string;
+  icon: LucideIcon;
+}

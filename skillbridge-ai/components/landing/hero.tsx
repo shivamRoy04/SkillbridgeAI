@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Map as MapIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import Link from "next/link";
 
 export function Hero() {
   return (
@@ -46,9 +47,11 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-8 flex flex-col gap-3 sm:flex-row"
         >
-          <Button size="lg" className="gap-2">
-            Get Started <ArrowRight className="h-4 w-4" />
-          </Button>
+          <Button size="lg" className="gap-2" asChild>
+  <Link href="/login">
+    Get Started <ArrowRight className="h-4 w-4" />
+  </Link>
+</Button>
           <Button size="lg" variant="outline">
             View Roadmap
           </Button>

@@ -31,3 +31,30 @@ export interface SidebarItem {
   href: string;
   icon: LucideIcon;
 }
+export interface StatCard {
+  label: string;
+  value: string;
+  change: string;
+  icon: LucideIcon;
+}
+
+export interface ActivityItem {
+  id: string;
+  title: string;
+  time: string;
+  icon: LucideIcon;
+}
+
+export interface ProgressDataPoint {
+  week: string;
+  progress: number;
+}
+export type JobStatus = "Applied" | "Interviewing" | "Offer" | "Rejected";
+
+export interface JobApplication {
+  id: string;
+  company: string;
+  role: string;
+  status: JobStatus;
+  dateApplied: string;
+}

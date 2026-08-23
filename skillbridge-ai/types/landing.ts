@@ -26,11 +26,13 @@ export interface FooterColumn {
   title: string;
   links: FooterLink[];
 }
+
 export interface SidebarItem {
   label: string;
   href: string;
   icon: LucideIcon;
 }
+
 export interface StatCard {
   label: string;
   value: string;
@@ -49,6 +51,7 @@ export interface ProgressDataPoint {
   week: string;
   progress: number;
 }
+
 export type JobStatus = "Applied" | "Interviewing" | "Offer" | "Rejected";
 
 export interface JobApplication {
@@ -57,4 +60,20 @@ export interface JobApplication {
   role: string;
   status: JobStatus;
   dateApplied: string;
+}
+
+export type ModuleStatus = "Not Started" | "In Progress" | "Completed";
+
+export interface RoadmapModule {
+  id: string;
+  title: string;
+  status: ModuleStatus;
+  progress: number;
+}
+
+export interface ResumeVersion {
+  id: string;
+  fileName: string;
+  uploadedAt: string;
+  score: number;
 }

@@ -48,12 +48,16 @@ export function Navbar() {
         </ul>
 
         <div className="hidden items-center gap-2 md:flex">
-          <ThemeToggle />
-          <Button variant="ghost" size="sm">
-            Sign In
-          </Button>
-          <Button size="sm">Get Started</Button>
-        </div>
+  <ThemeToggle />
+  <Link href="/login">
+    <Button variant="ghost" size="sm">
+      Sign In
+    </Button>
+  </Link>
+  <Link href="/signup">
+    <Button size="sm">Get Started</Button>
+  </Link>
+</div>
 
         <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
@@ -87,8 +91,10 @@ export function Navbar() {
               </li>
             ))}
             <li className="pt-2">
-              <Button className="w-full">Get Started</Button>
-            </li>
+  <Link href="/signup" onClick={() => setMobileOpen(false)}>
+    <Button className="w-full">Get Started</Button>
+  </Link>
+</li>
           </ul>
         </motion.div>
       )}

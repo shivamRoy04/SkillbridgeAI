@@ -8,10 +8,25 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { JOB_APPLICATIONS } from "@/constants/dashboard";
 import { getStatusVariant } from "@/lib/job-status";
+import type { JobApplication } from "@/types/landing";
 
-export function JobTrackerTable() {
+interface JobTrackerTableProps {
+  jobs: JobApplication[];
+}
+
+export function JobTrackerTable({ jobs }: JobTrackerTableProps) {
+  if (jobs.length === 0) {
+    return (
+      <Card className="flex flex-col items-center justify-center gap-2 p-12 text-center">
+        <p className="text-sm font-medium">No applications yet</p>
+        <p className="text-sm text-foreground/60">
+          Add your first job application to start tracking.
+        </p>
+      </Card>
+    );
+  }
+
   return (
     <Card className="p-2">
       <Table>
@@ -24,7 +39,7 @@ export function JobTrackerTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {JOB_APPLICATIONS.map((job) => (
+          {jobs.map((job) => (
             <TableRow key={job.id}>
               <TableCell className="font-medium">{job.company}</TableCell>
               <TableCell className="text-foreground/70">{job.role}</TableCell>

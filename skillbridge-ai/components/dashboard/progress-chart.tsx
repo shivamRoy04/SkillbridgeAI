@@ -1,20 +1,46 @@
 "use client";
 
-import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
+import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Card } from "@/components/ui/card";
-import { PROGRESS_DATA } from "@/constants/dashboard";
+import type { RoadmapModule } from "@/types/landing";
 
-export function ProgressChart() {
+interface ProgressChartProps {
+  modules: RoadmapModule[];
+}
+
+export function ProgressChart({ modules }: ProgressChartProps) {
+  const chartData = modules.map((m) => ({
+    title: m.title.length > 12 ? m.title.slice(0, 12) + "…" : m.title,
+    progress: m.progress,
+  }));
+
+  if (chartData.length === 0) {
+    return (
+      <Card className="flex h-full flex-col items-center justify-center gap-2 p-12 text-center">
+        <p className="text-sm font-medium">No roadmap modules yet</p>
+        <p className="text-sm text-foreground/60">
+          Add modules on the Roadmap page to see progress here.
+        </p>
+      </Card>
+    );
+  }
+
   return (
     <Card className="p-5">
-      <p className="text-sm font-medium">Roadmap progress over time</p>
+      <p className="text-sm font-medium">Progress by module</p>
       <div className="mt-4 h-56">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={PROGRESS_DATA}>
+          <BarChart data={chartData}>
             <XAxis
-              dataKey="week"
+              dataKey="title"
               axisLine={false}
               tickLine={false}
+              className="text-xs"
+            />
+            <YAxis
+              axisLine={false}
+              tickLine={false}
+              domain={[0, 100]}
               className="text-xs"
             />
             <Tooltip
@@ -25,15 +51,8 @@ export function ProgressChart() {
                 fontSize: "12px",
               }}
             />
-            <Area
-              type="monotone"
-              dataKey="progress"
-              stroke="var(--foreground)"
-              fill="var(--foreground)"
-              fillOpacity={0.1}
-              strokeWidth={2}
-            />
-          </AreaChart>
+            <Bar dataKey="progress" fill="var(--foreground)" fillOpacity={0.8} radius={4} />
+          </BarChart>
         </ResponsiveContainer>
       </div>
     </Card>

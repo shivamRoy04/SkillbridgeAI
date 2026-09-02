@@ -3,11 +3,10 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
-export async function addJobApplication(formData: {
-  company: string;
-  role: string;
+export async function addRoadmapModule(formData: {
+  title: string;
   status: string;
-  dateApplied: string;
+  progress: number;
 }) {
   const supabase = await createClient();
 
@@ -19,23 +18,21 @@ export async function addJobApplication(formData: {
     return { error: "Not authenticated" };
   }
 
-  const { error } = await supabase.from("job_applications").insert({
+  const { error } = await supabase.from("roadmap_modules").insert({
     user_id: user.id,
-    company: formData.company,
-    role: formData.role,
+    title: formData.title,
     status: formData.status,
-    date_applied: formData.dateApplied,
+    progress: formData.progress,
   });
 
   if (error) {
     return { error: error.message };
   }
 
-  revalidatePath("/dashboard/job-tracker");
- 
+  revalidatePath("/dashboard/roadmap");
   return { success: true };
 }
-export async function deleteJobApplication(id: string) {
+export async function deleteRoadmapModule(id: string) {
   const supabase = await createClient();
 
   const {
@@ -47,7 +44,7 @@ export async function deleteJobApplication(id: string) {
   }
 
   const { error } = await supabase
-    .from("job_applications")
+    .from("roadmap_modules")
     .delete()
     .eq("id", id)
     .eq("user_id", user.id);
@@ -56,7 +53,7 @@ export async function deleteJobApplication(id: string) {
     return { error: error.message };
   }
 
-  revalidatePath("/dashboard/job-tracker");
+  revalidatePath("/dashboard/roadmap");
   revalidatePath("/dashboard");
   return { success: true };
 }

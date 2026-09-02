@@ -1,10 +1,47 @@
+import { Target, TrendingUp, CheckCircle2, Flame } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { STAT_CARDS } from "@/constants/dashboard";
 
-export function StatCards() {
+interface StatCardsProps {
+  applicationsCount: number;
+  interviewingCount: number;
+  avgProgress: number;
+}
+
+export function StatCards({
+  applicationsCount,
+  interviewingCount,
+  avgProgress,
+}: StatCardsProps) {
+  const stats = [
+    {
+      label: "Roadmap Progress",
+      value: `${avgProgress}%`,
+      change: "Based on your modules",
+      icon: Target,
+    },
+    {
+      label: "Applications Sent",
+      value: String(applicationsCount),
+      change: `${interviewingCount} in interviewing`,
+      icon: TrendingUp,
+    },
+    {
+      label: "Mock Interviews",
+      value: "—",
+      change: "Coming soon",
+      icon: CheckCircle2,
+    },
+    {
+      label: "Day Streak",
+      value: "—",
+      change: "Coming soon",
+      icon: Flame,
+    },
+  ];
+
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {STAT_CARDS.map((stat) => {
+      {stats.map((stat) => {
         const Icon = stat.icon;
         return (
           <Card key={stat.label} className="p-5">

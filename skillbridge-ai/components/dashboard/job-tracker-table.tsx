@@ -1,3 +1,4 @@
+import { DeleteJobButton } from "@/components/dashboard/delete-job-button";
 import {
   Table,
   TableBody,
@@ -36,6 +37,7 @@ export function JobTrackerTable({ jobs }: JobTrackerTableProps) {
             <TableHead>Role</TableHead>
             <TableHead>Status</TableHead>
             <TableHead className="text-right">Date Applied</TableHead>
+<TableHead className="w-10" />
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -47,8 +49,11 @@ export function JobTrackerTable({ jobs }: JobTrackerTableProps) {
                 <Badge variant={getStatusVariant(job.status)}>{job.status}</Badge>
               </TableCell>
               <TableCell className="text-right text-foreground/60">
-                {job.dateApplied}
-              </TableCell>
+  {job.dateApplied}
+</TableCell>
+<TableCell>
+  <DeleteJobButton id={job.id} />
+</TableCell>
             </TableRow>
           ))}
         </TableBody>

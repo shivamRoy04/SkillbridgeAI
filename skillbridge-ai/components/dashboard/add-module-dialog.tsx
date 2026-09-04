@@ -52,12 +52,14 @@ export function AddModuleDialog() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild={false}>
-        <Button size="sm" className="gap-2" onClick={() => setOpen(true)}>
-          <Plus className="h-4 w-4" />
-          Add Module
-        </Button>
-      </DialogTrigger>
+      <DialogTrigger
+  render={
+    <Button size="sm" className="gap-2">
+      <Plus className="h-4 w-4" />
+      Add Module
+    </Button>
+  }
+/>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Add roadmap module</DialogTitle>

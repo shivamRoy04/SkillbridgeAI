@@ -73,7 +73,7 @@ export interface RoadmapModule {
 
 export interface ResumeVersion {
   id: string;
-  fileName: string;
-  uploadedAt: string;
-  score: number;
+  file_name: string;
+  file_path: string;
+  uploaded_at: string;
 }

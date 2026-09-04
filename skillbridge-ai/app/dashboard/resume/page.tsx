@@ -1,18 +1,31 @@
+import { createClient } from "@/lib/supabase/server";
 import { ResumeList } from "@/components/dashboard/resume-list";
-import { Button } from "@/components/ui/button";
+import { UploadResumeDialog } from "@/components/dashboard/upload-resume-dialog";
 
-export default function ResumePage() {
+export default async function ResumePage() {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const { data: resumes } = await supabase
+    .from("resume_versions")
+    .select("*")
+    .eq("user_id", user?.id)
+    .order("uploaded_at", { ascending: false });
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Resume</h1>
-          <p className="mt-1 text-foreground/60">Upload and track your resume versions.</p>
+          <p className="mt-1 text-foreground/60">Upload and manage your resume versions.</p>
         </div>
-        <Button size="sm">Upload New</Button>
+        <UploadResumeDialog />
       </div>
 
-      <ResumeList />
+      <ResumeList resumes={resumes ?? []} />
     </div>
   );
 }
